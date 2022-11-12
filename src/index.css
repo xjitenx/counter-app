@@ -57,7 +57,11 @@ body {
 }
 
 .mt-2 {
-  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.mr-2 {
+  margin-top: 20px;
 }
 
 .d-flex {
