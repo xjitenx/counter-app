@@ -24,15 +24,16 @@ export const TimerActions: React.FC<TimerActionsProps> = ({
     startSecondCounter(1000);
   };
 
-  const stopTimer = (counterRunningFlag: boolean) => {
+  const stopTimer = () => {
     clearTimeout(counterInterval);
-    if (counterRunningFlag) {
-      changeCounterRunning();
-    }
+    changeCounterRunning();
   };
 
   const resetTimer = () => {
-    stopTimer(false);
+    clearTimeout(counterInterval);
+    if (counterRunning) {
+      changeCounterRunning();
+    }
     setSeconds(0);
   };
 
@@ -53,7 +54,7 @@ export const TimerActions: React.FC<TimerActionsProps> = ({
         <button
           className="button stop-button ml-2"
           disabled={!counterRunning}
-          onClick={() => stopTimer(true)}
+          onClick={stopTimer}
         >
           STOP
         </button>
