@@ -7,7 +7,7 @@ const TimerContainer: React.FC = () => {
   return (
     <div className="h-100 w-100 d-flex flex-column align-center justify-center counter-container">
       <TimerDisplay seconds={seconds} />
-      <TimerActions setSeconds={setSeconds} />
+      <TimerActions seconds={seconds} setSeconds={setSeconds} />
     </div>
   );
 };

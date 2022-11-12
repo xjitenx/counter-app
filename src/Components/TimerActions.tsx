@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 
 type TimerActionsProps = {
+  seconds: number;
   setSeconds: Function;
 };
 
 let counterInterval: NodeJS.Timer;
 
-export const TimerActions: React.FC<TimerActionsProps> = ({ setSeconds }) => {
+export const TimerActions: React.FC<TimerActionsProps> = ({
+  seconds,
+  setSeconds,
+}) => {
   const [counterRunning, setCounterRunning] = useState(false);
 
   const startSecondCounter = (timer: number) => {
@@ -20,9 +24,16 @@ export const TimerActions: React.FC<TimerActionsProps> = ({ setSeconds }) => {
     startSecondCounter(1000);
   };
 
-  const stopTimer = () => {
+  const stopTimer = (counterRunningFlag: boolean) => {
     clearTimeout(counterInterval);
-    changeCounterRunning();
+    if (counterRunningFlag) {
+      changeCounterRunning();
+    }
+  };
+
+  const resetTimer = () => {
+    stopTimer(false);
+    setSeconds(0);
   };
 
   const changeCounterRunning = () => {
@@ -30,20 +41,29 @@ export const TimerActions: React.FC<TimerActionsProps> = ({ setSeconds }) => {
   };
 
   return (
-    <div className="d-flex align-items">
+    <div className="d-flex flex-column align-center justify-center">
+      <div className="d-flex">
+        <button
+          className="button start-button"
+          disabled={counterRunning}
+          onClick={startTimer}
+        >
+          START
+        </button>
+        <button
+          className="button stop-button ml-2"
+          disabled={!counterRunning}
+          onClick={() => stopTimer(true)}
+        >
+          STOP
+        </button>
+      </div>
       <button
-        className="button start-button"
-        disabled={counterRunning}
-        onClick={startTimer}
+        className="button reset-button mt-2"
+        disabled={seconds === 0}
+        onClick={resetTimer}
       >
-        START
-      </button>
-      <button
-        className="button stop-button ml-2"
-        disabled={!counterRunning}
-        onClick={stopTimer}
-      >
-        STOP
+        RESET
       </button>
     </div>
   );

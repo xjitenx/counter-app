@@ -25,6 +25,7 @@ body {
 }
 
 .button {
+  width: 150px;
   padding: 10px;
   font-size: xx-large;
   border: none;
@@ -36,6 +37,10 @@ body {
 
 .stop-button {
   background-color: brown;
+}
+
+.reset-button {
+  background-color: cadetblue;
 }
 
 /* Global Classes */
