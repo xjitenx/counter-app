@@ -1,19 +1,30 @@
+import { rejects } from "assert";
 import React, { useState } from "react";
+
+let counterInterval: NodeJS.Timer;
 
 const Timer: React.FC = () => {
   const [seconds, setSeconds] = useState(0);
   const [counterRunning, setCounterRunning] = useState(false);
 
-  const changeCounterRunning = () => {
-    setCounterRunning((prevValue) => !prevValue);
+  const startSecondCounter = (timer: number) => {
+    counterInterval = setInterval(() => {
+      setSeconds((prevSecond) => prevSecond + 1);
+    }, timer);
   };
 
-  const startTimer = () => {
+  const startTimer = async () => {
     changeCounterRunning();
+    startSecondCounter(1000);
   };
 
   const stopTimer = () => {
+    clearTimeout(counterInterval);
     changeCounterRunning();
+  };
+
+  const changeCounterRunning = () => {
+    setCounterRunning((prevValue) => !prevValue);
   };
 
   return (
