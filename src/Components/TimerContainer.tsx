@@ -5,7 +5,7 @@ import { TimerActions } from "./TimerActions";
 const TimerContainer: React.FC = () => {
   const [seconds, setSeconds] = useState(0);
   return (
-    <div className="h-100 w-100 d-flex flex-column align-center justify-center counter-container">
+    <div className="counter-container d-flex flex-column align-center p-2">
       <TimerDisplay seconds={seconds} />
       <TimerActions seconds={seconds} setSeconds={setSeconds} />
     </div>
